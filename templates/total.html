@@ -1,0 +1,55 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Evaluation | Sharda Univeristy</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <link rel="stylesheet" href="{% static 'style2.css'%}">
+</head>
+
+<body>
+    <div class="logo">
+        <img src="{% static '/images/logo.jpg' %}" alt="logo">
+    </div>
+    <div class="wrapper">
+        <div class="title">
+            Final Project Score
+        </div>
+        <form action="" target="" method="post" class="form">
+            {% csrf_token %}
+            <div class="inputfield">
+                <label>System ID</label>
+                <input type="number" class="input" name="system_id">
+            </div>
+            <div class="inputfield">
+                <label>Evaluation - 0</label>
+                <input class="input eval-marks" onblur="findTotal()" type="number" name="eval0" id="">
+            </div>
+            <div class="inputfield">
+                <label>Evaluation - I</label>
+                <input class="input eval-marks" onblur="findTotal()" type="number" name="eval1" id="">
+            </div>
+            <div class="inputfield">
+                <label>Evaluation - II</label>
+                <input class="input eval-marks" onblur="findTotal()" type="number" name="eval2" id="">
+            </div>
+            <div class="inputfield">
+                <label>Total</label>
+                <input type="number" class="input" id="total" name = "Total">
+            </div>
+            <div class="inputfield">
+                <input type="submit" value="Submit" class="btn">
+            </div>
+    </div>
+   
+    </form>
+    {% for  message in messages  %}
+    <h3>{{message}}</h3>
+{% endfor %}
+    </div>
+    <script src="{% static 'scripts/script.js'%}"></script>
+</body>
+</html>

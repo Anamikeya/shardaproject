@@ -1,0 +1,42 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Evaluation | Sharda Univeristy</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <link rel="stylesheet" href="{% static 'style2.css'%}">
+</head>
+
+<body>
+    <div class="logo">
+        <img src="{% static '/images/logo.jpg' %}" alt="logo">
+    </div>
+    <div class="wrapper">
+        <div class="title">
+            Final Project Score
+        </div>
+        <form action="" target="" method="post" class="form">
+            {% csrf_token %}
+          
+            <div class="inputfield">
+                <label>Username</label>
+                <input class="input eval-marks" onblur="findTotal()" type="text" name="username" id="">
+            </div>
+            <div class="inputfield">
+                <label>Password</label>
+                <input type="password" class="input" id="total" name = "password">
+            </div>
+            <div class="inputfield">
+                <input type="submit" value="Submit" class="btn">
+            </div>
+    </div>
+   
+    </form>
+
+    </div>
+   
+</body>
+</html>

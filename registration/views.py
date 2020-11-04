@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .models import regitration,evaluationI,evaluationII
+from .models import evaluation0,evaluationI,evaluationII,total
+from django.contrib.auth.models import User,auth
 
 # Create your views here.
 def front(request):
@@ -88,7 +89,7 @@ def registers(request):
 
 def register(request):
     if request.method == "POST":
-        data = regitration()
+        data = evaluation0()
 
         data.S_No = request.POST.get('S_No')
         data.Guide_Name = request.POST.get('Guide_Name')
@@ -124,3 +125,40 @@ def register(request):
         return redirect('register')
     else:
         return render(request,'evaluation.html')
+
+def totals(request):
+    if request.method =="POST":
+        sum = total()
+        
+        sum.system_id = request.POST.get('system_id')
+        sum.total_of_eval0= request.POST.get('eval0')
+        sum.total_of_eval1= request.POST.get('eval1')
+        sum.total_of_eval2= request.POST.get('eval2')
+        sum.final_Marks = request.POST.get('Total')
+        
+       
+        messages.info(request,"Successfully Uploaded")
+
+        sum.save()
+        return redirect('totals')
+    else:
+        return render(request,'total.html')
+
+def login(request):
+    if request.method=="POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect("front")
+        else:
+            messages.info(request,'invalid credentials')
+            return redirect("login")
+    else:
+        return render(request,'login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')

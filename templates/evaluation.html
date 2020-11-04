@@ -11,6 +11,7 @@
 
 </head>
 <body>
+    {% if user.is_authenticated %}
     <div class="logo">
         <img src="{% static 'images/logo.jpg' %}" alt="logo">
     </div>
@@ -195,5 +196,8 @@
     </div>
    
     <script src="{% static 'scripts/script.js'%}"></script>
+    {% else %}
+    <h1>you are not logged in as a Admin Please get lost</h1>
+    {% endif %}
 </body>
 </html>

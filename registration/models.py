@@ -1,12 +1,13 @@
 from django.db import models
 
 # Create your models here.
-class regitration(models.Model):
+class evaluation0(models.Model):
+    id = models.IntegerField()
     S_No = models.CharField(max_length=100)
     Guide_Name = models.CharField(max_length=100)
     Project_Title = models.CharField(max_length = 100)
     Student_Name = models.CharField(max_length = 100)
-    System_Id = models.CharField(max_length = 100)
+    System_Id = models.CharField(max_length = 100,primary_key=True)
     Roll_No = models.CharField(max_length=100)
     Team_size = models.CharField(max_length = 100)
     Project_Category = models.CharField(max_length=100)
@@ -36,7 +37,7 @@ class evaluationI(models.Model):
     Guide_Name = models.CharField(max_length=100)
     Project_Title = models.CharField(max_length = 100)
     Student_Name = models.CharField(max_length = 100)
-    System_Id = models.CharField(max_length = 100)
+    System_Id = models.ForeignKey(evaluation0,on_delete=models.CASCADE)
     Roll_No = models.CharField(max_length=100)
     Team_size = models.CharField(max_length = 100)
     Project_Category = models.CharField(max_length=100)
@@ -65,7 +66,7 @@ class evaluationII(models.Model):
     Guide_Name = models.CharField(max_length=100)
     Project_Title = models.CharField(max_length = 100)
     Student_Name = models.CharField(max_length = 100)
-    System_Id = models.CharField(max_length = 100)
+    System_Id = models.ForeignKey(evaluation0,on_delete=models.CASCADE)
     Roll_No = models.CharField(max_length=100)
     Team_size = models.CharField(max_length = 100)
     Project_Category = models.CharField(max_length=100)
@@ -88,3 +89,10 @@ class evaluationII(models.Model):
     Quality_Of_Project_Title = models.CharField(max_length = 100)
     Total = models.IntegerField()
     Remark = models.CharField(max_length = 100)
+
+class total(models.Model):
+    system_id = models.CharField(max_length=100)
+    total_of_eval0= models.IntegerField()
+    total_of_eval1= models.IntegerField()
+    total_of_eval2= models.IntegerField()
+    final_Marks=models.IntegerField()

@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import data
+
 from django.contrib import messages
+import smtplib;
 # Create your views here.
 def home(request):
     if request.method == 'POST':
@@ -20,7 +22,16 @@ def home(request):
             datas.Project_Passcode = request.POST.get('Project_Passcode')
             datas.Phone_Number = request.POST.get('Phone_Number')
             datas.Submitted_Sypnosis = request.POST.get('Submitted_Sypnosis')
-            
+
+            to = datas.Email
+            content = "The students you are enrolled in with "+str(datas.Guide_Name)
+            servers = smtplib.SMTP('smtp.gmail.com',587)
+            servers.ehlo()
+            servers.starttls()
+            servers.login('nayakpearl2@gmail.com','anamika05')
+            servers.sendmail('nayakpearl2@gmail.com',to,content)
+            servers.close()
+                
             
             datas.save()
             messages.info(request,"successfully uploaded")
@@ -30,6 +41,7 @@ def home(request):
             
     else:    
             return render(request,"final.html")
-    
-  
-    
+
+
+
+
